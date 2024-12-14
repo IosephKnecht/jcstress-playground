@@ -33,33 +33,34 @@ class FixedBufferHandlerThreadHolder {
             val handlerThread = handlerThread
             if (handlerThread != null) return@synchronized handlerThread
             val newHandlerThread = FixedBufferHandlerThread()
-            newHandlerThread.start()
+//            newHandlerThread.start()
             this.handlerThread = newHandlerThread
             return@synchronized newHandlerThread
         }
     }
 }
 
-class FixedBufferHandlerThread : Thread() {
+class FixedBufferHandlerThread /*: Thread() */ {
 
     private var looper: Looper? = null
     private var handler: Handler? = null
 
-    override fun run() {
-        super.run()
-        Looper.prepare()
-        synchronized(this as java.lang.Object) {
-            looper = Looper.myLooper()
-            notifyAll()
-        }
-        while (true) {
-
-        }
-    }
+//    override fun run() {
+//        super.run()
+//        Looper.prepare()
+//        synchronized(this as java.lang.Object) {
+//            looper = Looper.myLooper()
+//            notifyAll()
+//        }
+//        while (true) {
+//
+//        }
+//    }
 
     fun getLooper(): Looper = synchronized(this as java.lang.Object) {
         if (looper == null) {
-            wait()
+            looper = Looper()
+//            wait()
         }
         return@synchronized looper!!
     }

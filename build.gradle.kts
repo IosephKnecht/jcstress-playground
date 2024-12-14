@@ -37,4 +37,5 @@ jcstress {
     iterations = "2"
     forks = "1"
     heapPerFork = "4096"
+    affinityMode = "NONE"
 }
